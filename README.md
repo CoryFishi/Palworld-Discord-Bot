@@ -44,6 +44,14 @@ CHANNEL_ID=your_log_channel_id
 ADMIN_ROLE=Palworld Admin
 ```
 
+Ensure within the PalWorldSettings.ini file for your server, these settings are properlly set before using the bot.
+This enables the bot to send commands and recieve data from the PalWorld server.
+```
+RESTAPIEnabled=True
+RESTAPIPort=8212
+AdminPassword=Your_Password  # This will be your password for admin commands/ the api interface
+```
+
 ## Commands
 | Slash Command |	Description |	Admin Only |
 | ---------- | ----- | ---------- |
@@ -69,19 +77,30 @@ Only members with the role name defined in ADMIN_ROLE can use restricted command
 ### Logging
 All major commands and events are logged in the channel specified by CHANNEL_ID.
 
-#### Player joins
-#### Setting changes
-#### Errors
+Player joins, Setting changes, Errors
 
 ## Development Scripts
 ```
-npm run start     # Start the bot
-npm run dev       # Start with nodemon (auto-restart on save)
+node ./bot.js     # Start the bot
 ```
 ## Testing Tips
 Make sure the Palworld API is running on localhost:8212
 Ensure correct permissions are given to your bot in Discord
 Use /palsave to test communication with the API
+
+## Future Developments
+
+- Detects player disconnects and logs them
+- Server Uptime tracking
+- Top Active Players leaderboard
+- Sheduled restarts
+- Sheduled Backups
+- Server crash detection + auto-restart
+- Discord user tied to palworld user
+- Dynamic role-based permissions
+- Multi-server support
+- Help command
+- Notify owner when role-based commands are used
 
 ## License
 MIT © Cory Fishburn
