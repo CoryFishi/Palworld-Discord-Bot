@@ -1,0 +1,17 @@
+{
+  "name": "palworld-discord-bot",
+  "version": "1.0.0",
+  "description": "A discord bot to assist with moderation and remote server control for Palworld servers.",
+  "license": "ISC",
+  "author": "Cory Fishburn",
+  "type": "commonjs",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.4.7"
+  }
+}
