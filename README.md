@@ -73,7 +73,7 @@ All major commands and events are logged in the channel specified by CHANNEL_ID.
 #### Setting changes
 #### Errors
 
-##Development Scripts
+## Development Scripts
 ```
 npm run start     # Start the bot
 npm run dev       # Start with nodemon (auto-restart on save)
