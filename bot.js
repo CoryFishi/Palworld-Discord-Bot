@@ -14,6 +14,7 @@ const handleShutdown = require("./handlers/shutdown");
 const handleForceStop = require("./handlers/forcestop");
 const handleRestart = require("./handlers/restart");
 const handleSetSetting = require("./handlers/setsetting");
+const handleHelp = require("./handlers/help");
 const { watchPlayers } = require("./handlers/playerWatcher");
 const {
   Client,
@@ -86,6 +87,9 @@ setInterval(updateBotStatus, 60000);
 
 // Define the slash commands
 const commands = [
+  new SlashCommandBuilder()
+    .setName("palhelp")
+    .setDescription("Get all Palworld server commands"),
   new SlashCommandBuilder()
     .setName("palsettings")
     .setDescription("Get all Palworld server settings"),
@@ -211,6 +215,8 @@ client.on("interactionCreate", async (interaction) => {
     await handleStart(interaction);
   } else if (commandName === "palplayers") {
     await handlePlayers(interaction);
+  } else if (commandName === "palhelp") {
+    await handleHelp(interaction, commands);
   } else if (commandName === "palstatus") {
     await handleStatus(interaction);
   } else if (commandName === "palsettings") {
