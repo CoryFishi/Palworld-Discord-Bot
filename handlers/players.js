@@ -1,6 +1,7 @@
 const axios = require("axios");
 const API_USERNAME = process.env.API_USERNAME;
 const API_PASSWORD = process.env.API_PASSWORD;
+const API_BASE_URL = process.env.API_BASE_URL;
 const auth = Buffer.from(`${API_USERNAME}:${API_PASSWORD}`).toString("base64");
 const { MessageFlags } = require("discord.js");
 const { checkServerStatus } = require("../helpers/apiHelper");

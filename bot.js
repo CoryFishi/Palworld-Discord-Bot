@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "./config/.env" });
+require("dotenv").config({ path: "./.env" });
 const handleSettings = require("./handlers/settings");
 const handleInfo = require("./handlers/info");
 const handleMetrics = require("./handlers/metrics");
@@ -62,7 +62,6 @@ async function updateBotStatus() {
           },
         ],
       });
-      console.log(`Server is online with ${playerCount} players.`);
     } else {
       throw new Error("Failed to retrieve server status.");
     }
@@ -239,6 +238,10 @@ client.on("interactionCreate", async (interaction) => {
   } else if (commandName === "palsetsetting") {
     await handleSetSetting(interaction);
   }
+});
+
+process.on("unhandledRejection", (error) => {
+  console.error("Unhandled rejection:", error);
 });
 
 // Start the bot

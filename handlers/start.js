@@ -10,6 +10,9 @@ async function handleStart(interaction) {
     if (!isAdmin(interaction)) {
       return await handleUnauthorized(interaction);
     }
+
+    await interaction.deferReply({ ephemeral: true });
+
     // Check if the server is already running
     const isRunning = await checkIfServerIsRunning();
 
@@ -17,7 +20,6 @@ async function handleStart(interaction) {
       console.log("Server is already running.");
       await interaction.reply({
         content: "Palworld server is already running!",
-        flags: MessageFlags.Ephemeral,
       });
       return;
     }
@@ -32,22 +34,30 @@ async function handleStart(interaction) {
     serverProcess.unref();
 
     // Confirm to the user that the server is starting
-    await interaction.reply({
+    await interaction.editReply({
       content: "Palworld server is starting...",
-      flags: MessageFlags.Ephemeral,
     });
+
+    const currentTime = new Date().toLocaleString();
 
     // Send log to the designated channel
     await sendLog(
       interaction,
-      `${interaction.user.username} started the server.`
+      `[${currentTime}] **Server Started:** ${interaction.user.username} started the server.`
     );
   } catch (error) {
     console.error(`Error starting the server: ${error.message}`);
-    await interaction.reply({
-      content: `Error starting the server: ${error.message}`,
-      flags: MessageFlags.Ephemeral,
-    });
+
+    if (!interaction.replied && !interaction.deferred) {
+      await interaction.reply({
+        content: `Error starting the server: ${error.message}`,
+        flags: MessageFlags.Ephemeral,
+      });
+    } else {
+      await interaction.editReply({
+        content: `Error starting the server: ${error.message}`,
+      });
+    }
   }
 }
 
