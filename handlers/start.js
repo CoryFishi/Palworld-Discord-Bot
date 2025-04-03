@@ -5,6 +5,14 @@ const { spawn, exec } = require("child_process");
 const { MessageFlags } = require("discord.js");
 const { isAdmin, handleUnauthorized } = require("../helpers/adminHelper");
 
+const args = [
+  "-logformat=text",
+  "-useperfthreads",
+  "-NoAsyncLoadingThread",
+  "-UseMultithreadForDS",
+  "-publiclobby",
+];
+
 async function handleStart(interaction) {
   try {
     if (!isAdmin(interaction)) {
@@ -25,7 +33,7 @@ async function handleStart(interaction) {
     }
 
     // Spawn Palworld server as a detached process
-    const serverProcess = spawn(SERVER_PATH, [], {
+    const serverProcess = spawn(SERVER_PATH, args, {
       detached: true,
       stdio: "ignore",
     });
